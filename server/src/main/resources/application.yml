@@ -1,0 +1,3 @@
+spring:
+    controller:
+        path-prefix: /api
