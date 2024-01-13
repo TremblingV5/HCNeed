@@ -1,6 +1,8 @@
-package org.hcneed.server.common;
+package org.hcneed.server.common.response;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,6 +17,7 @@ public class R<T> implements Serializable {
     private Object data;
     private Long count;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonProperty(value = "return_at")
     private LocalDateTime returnDateTime;
 
     public R() {}
