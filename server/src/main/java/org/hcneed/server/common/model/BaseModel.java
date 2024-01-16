@@ -21,7 +21,7 @@ public class BaseModel implements Serializable {
     @Generated(GenerationTime.INSERT)
     private Timestamp created_at;
 
-    @Column(name = "created_at", columnDefinition = "CURRENT_TIMESTAMP")
+    @Column(name = "updated_at", columnDefinition = "CURRENT_TIMESTAMP")
     @Generated(GenerationTime.INSERT)
     private Timestamp updated_at;
 
