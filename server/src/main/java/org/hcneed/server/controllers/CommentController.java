@@ -41,4 +41,10 @@ public class CommentController extends BaseController {
         return ok();
     }
 
+    @PutMapping("/{id}/examine")
+    @Operation(description = "审核评论")
+    public R examine(@PathVariable Long id, @RequestBody Object data) {
+        return ok();
+    }
+
 }

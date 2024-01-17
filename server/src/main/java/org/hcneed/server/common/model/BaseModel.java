@@ -9,7 +9,6 @@ import org.hibernate.annotations.GenericGenerator;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-@SuperBuilder(toBuilder = true)
 @MappedSuperclass
 public class BaseModel implements Serializable {
     @Id
@@ -17,11 +16,11 @@ public class BaseModel implements Serializable {
     @GenericGenerator(name = "SnowflakeUtil", strategy = "org.hcneed.server.utils.SnowflakeUtil")
     private Long id;
 
-    @Column(name = "created_at", columnDefinition = "CURRENT_TIMESTAMP", updatable = false)
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", updatable = false)
     @Generated(GenerationTime.INSERT)
     private Timestamp created_at;
 
-    @Column(name = "updated_at", columnDefinition = "CURRENT_TIMESTAMP")
+    @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Generated(GenerationTime.INSERT)
     private Timestamp updated_at;
 

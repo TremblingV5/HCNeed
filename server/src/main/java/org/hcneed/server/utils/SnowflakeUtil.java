@@ -5,11 +5,13 @@ import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.IdUtil;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.id.Configurable;
+import org.hibernate.id.IdentifierGenerator;
 
 import java.io.Serializable;
 
 @Slf4j
-public class SnowflakeUtil {
+public class SnowflakeUtil implements IdentifierGenerator, Configurable {
     public static long WORKER_ID = 1;
     public static long DATACENTER_ID = 1;
 
