@@ -1,15 +1,18 @@
 package org.hcneed.server.controllers;
 
+import cn.dev33.satoken.annotation.SaIgnore;
+import cn.dev33.satoken.stp.StpUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.hcneed.server.common.controller.BaseController;
 import org.hcneed.server.common.response.R;
+import org.hcneed.server.entities.dto.userDto.LoginRequest;
 import org.hcneed.server.entities.dto.userDto.RegisterRequest;
 import org.hcneed.server.entities.models.User;
-import org.hcneed.server.exceptions.UserEmailExisted;
-import org.hcneed.server.services.UserService;
+import org.hcneed.server.exceptions.user.UserHasBeenBanned;
+import org.hcneed.server.exceptions.user.UserNotExists;
 import org.hcneed.server.services.impls.UserServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,14 +31,25 @@ public class UserController extends BaseController {
 
     @PostMapping("/login")
     @Operation(description = "用户登陆")
-    public R login() {
-        return ok();
+    @SaIgnore
+    public R login(@RequestBody LoginRequest request) {
+        User user = userServiceImpl.login(request.getEmail(), request.getPassword());
+        if (user == null) {
+            throw new UserNotExists();
+        }
+        if (user.getBanned_at() != null) {
+            throw new UserHasBeenBanned();
+        }
+        StpUtil.login(user.getId());
+        return ok(user);
     }
 
     @PostMapping("/register")
     @Operation(description = "用户注册")
+    @SaIgnore
     public R register(@RequestBody RegisterRequest request) {
         User user = userServiceImpl.register(request.getEmail(), request.getValidateCode(), request.getPassword());
+        StpUtil.login(user.getId());
         return ok(user);
     }
 
@@ -54,7 +68,8 @@ public class UserController extends BaseController {
     @GetMapping("/{id}")
     @Operation(description = "获取指定用户的所有信息")
     public R user(@PathVariable Long id) {
-        return ok();
+        User user = userServiceImpl.load(id);
+        return ok(user);
     }
 
     @PutMapping("/")

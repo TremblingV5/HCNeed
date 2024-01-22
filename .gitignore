@@ -2,3 +2,4 @@
 .vscode/
 .mvn/
 mvnw*
+*.log

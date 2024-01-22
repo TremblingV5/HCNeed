@@ -4,8 +4,11 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.annotation.Resource;
 import org.hcneed.server.entities.models.QUser;
 import org.hcneed.server.entities.models.User;
+import org.hcneed.server.exceptions.user.UserNotExists;
 import org.hcneed.server.repositories.query.QUserRepository;
 import org.springframework.stereotype.Repository;
+
+import java.sql.Timestamp;
 
 @Repository
 public class QUserRepositoryImpl implements QUserRepository {
@@ -23,7 +26,15 @@ public class QUserRepositoryImpl implements QUserRepository {
     }
 
     @Override
-    public User saveNewUser(String email, String password) {
-        return null;
-    }
+    public void banUser(Long id) {
+        User user = jpaQueryFactory.select(QUser.user).where(QUser.user.id.eq(id)).fetchOne();
+        if (user == null) {
+            throw new UserNotExists();
+        }
+        jpaQueryFactory
+                .update(QUser.user)
+                .set(QUser.user.banned_at, new Timestamp(System.currentTimeMillis()))
+                .where(QUser.user.id.eq(id))
+                .execute();
+    };
 }

@@ -1,9 +1,10 @@
 package org.hcneed.server.services;
 
+import org.hcneed.server.common.exception.BaseException;
 import org.hcneed.server.entities.models.User;
-import org.hcneed.server.exceptions.UserEmailExisted;
 
 public interface UserService {
-    User login(String username, String password);
-    User register(String email, String validateCode, String password) throws UserEmailExisted;
+    User login(String email, String password);
+    User register(String email, String validateCode, String password);
+    User load(Long id);
 }
