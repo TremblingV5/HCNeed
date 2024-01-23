@@ -18,6 +18,6 @@ public class SaTokenConfig extends WebMVCConfig {
                 throw new TokenInvalid();
             }
         }))
-        .addPathPatterns("/**");
+        .addPathPatterns("/api/**");
     }
 }

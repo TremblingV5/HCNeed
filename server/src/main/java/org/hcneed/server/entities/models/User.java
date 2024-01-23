@@ -38,7 +38,7 @@ public class User extends BaseModel {
     @Column(nullable = true)
     private Enum<UserType> type;
 
-    @Column(name = "banned_at")
+    @Column(name = "banned_at", nullable = true)
     private Timestamp banned_at;
 
 }

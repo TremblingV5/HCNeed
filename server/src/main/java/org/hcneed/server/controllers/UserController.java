@@ -3,7 +3,6 @@ package org.hcneed.server.controllers;
 import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.StpUtil;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.hcneed.server.common.controller.BaseController;
@@ -16,18 +15,14 @@ import org.hcneed.server.exceptions.user.UserNotExists;
 import org.hcneed.server.services.impls.UserServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 @Tag(name = "用户功能接口")
 public class UserController extends BaseController {
     @Resource
     private UserServiceImpl userServiceImpl;
-
-    @GetMapping("/greet")
-    @Parameter(name = "greet", description = "greet")
-    public R greet() {
-        return ok("greeting");
-    }
 
     @PostMapping("/login")
     @Operation(description = "用户登陆")
@@ -56,7 +51,8 @@ public class UserController extends BaseController {
     @GetMapping("/list")
     @Operation(description = "获取所有用户的列表")
     public R list() {
-        return ok();
+        List<User> users = userServiceImpl.list();
+        return ok(users);
     }
 
     @GetMapping("/list/{type}")
@@ -87,6 +83,7 @@ public class UserController extends BaseController {
     @PostMapping("/ban/{id}")
     @Operation(description = "封禁用户")
     public R ban(@PathVariable Long id) {
+        userServiceImpl.ban(id);
         return ok();
     }
 }

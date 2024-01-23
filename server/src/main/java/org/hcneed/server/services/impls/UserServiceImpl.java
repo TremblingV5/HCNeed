@@ -11,6 +11,8 @@ import org.hcneed.server.utils.PasswordUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -54,4 +56,17 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
+
+    @Override
+    @Transactional
+    public void ban(Long id) {
+        qUserRepositoryImpl.banUser(id);
+    }
+
+    @Override
+    public List<User> list() {
+        List<User> users = userJPARepository.findAll();
+        return users;
+    }
+
 }
