@@ -133,6 +133,17 @@
 			<artifactId>sa-token-spring-boot3-starter</artifactId>
 			<version>1.37.0</version>
 		</dependency>
+		<!--日志以json格式输出所需-->
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>6.6</version>
+		</dependency>
+		<!--springboot日志-start-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

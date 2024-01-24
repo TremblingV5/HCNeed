@@ -1,6 +1,7 @@
 package org.hcneed.server.common.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+@Data
 @MappedSuperclass
 public class BaseModel implements Serializable {
     @Id

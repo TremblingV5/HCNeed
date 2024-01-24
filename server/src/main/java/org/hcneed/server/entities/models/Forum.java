@@ -17,4 +17,7 @@ public class Forum extends BaseModel {
     @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false, updatable = false)
+    private Long createdBy;
+
 }

@@ -1,0 +1,70 @@
+<configuration>
+<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <springProperty scope="context" name="appName" source="spring.application.name" />
+        <!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+        <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${appName} %highlight(%-5level) %blue(%X{X-B3-ParentSpanId}) %yellow(%thread) %green(%logger) %msg%n" />
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!--<encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>-->
+        <!--json-第一种方式：-->
+        <!--<encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "ip": "${ip}",
+                        "app": "${appName}",
+                        "level": "%level",
+                        "trace": "%X{X-B3-TraceId:-}",
+                        "class": "%logger",
+                        "message": "%message",
+                        "span": "%X{X-B3-SpanId:-}",
+                        "parent": "%X{X-B3-ParentSpanId:-}",
+                        "thread": "%thread",
+                        "stack_trace": "%exception{10}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>-->
+        <!--json-第二种方式-->
+            <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <providers>
+                    <pattern>
+                        <pattern>
+                            {
+                                <!--服务名称-->
+                                "appName": "${appName}",
+                                <!--打印时间-->
+                                "time": "%date{yyyy-MM-dd HH:mm:ss.SSS}",
+                                <!--日志级别-->
+                                "level": "%level",
+                                <!--进程ID-->
+                                "pid": "${PID:-}",
+                                <!--线程名-->
+                                "thread": "%thread",
+                                <!--全限定类名-->
+                                "class": "%logger",
+                                <!--类中的哪个方法-->
+                                "method": "%method",
+                                <!--类中的第几行-->
+                                "line": "%line",
+                                <!--日志打印的信息-->
+                                "message": "%message",
+                                <!--堆栈异常信息-->
+                                "statck_trace":"%xEx"
+                            }
+                        </pattern>
+                    </pattern>
+                </providers>
+            </encoder>
+    </appender>
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

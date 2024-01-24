@@ -6,6 +6,11 @@ spring:
         username: root
         password: root
         driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+        batch:
+            jdbc-url: jdbc:mysql://localhost:3306/HCNeed?useUnicode=true&characterEncoding=UTF-8
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            username: root
+            password: root
     jpa:
         hibernate:
             ddl-auto: update

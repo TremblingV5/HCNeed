@@ -1,4 +1,4 @@
-package org.hcneed.server.entities.models;
+package org.hcneed.server.entities.models.relations;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,19 +8,16 @@ import org.hcneed.server.common.model.BaseModel;
 
 @Data
 @Entity
-@Table(name = "Post")
-public class Post extends BaseModel {
+@Table(name = "UserFollowCompany")
+public class UserFollowCompany extends BaseModel {
 
     @Column(nullable = false)
-    private String title;
+    private Long userId;
 
     @Column(nullable = false)
-    private String content;
+    private Long companyId;
 
     @Column(nullable = false)
-    private Long forumId;
-
-    @Column(nullable = false, updatable = false)
-    private Long createdBy;
+    private boolean isFollow;
 
 }
