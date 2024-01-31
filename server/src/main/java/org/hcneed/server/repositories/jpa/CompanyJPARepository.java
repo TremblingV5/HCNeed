@@ -11,5 +11,6 @@ import java.util.List;
 public interface CompanyJPARepository extends BaseRepository<Company, Long> {
     List<Company> findAll();
     Company getCompanyById(Long id);
+    Company getCompanyByName(String name);
     boolean existsById(Long id);
 }
