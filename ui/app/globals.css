@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  min-height: 100vh;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,6 +18,7 @@
 }
 
 body {
+  min-height: 100vh;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -25,3 +27,34 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.App {
+  min-height: 100vh;
+}
+
+.flex {
+  min-height: 100vh;
+}
+
+Layout {
+  min-height: 100vh;
+}
+
+PageHeader {
+  min-height: 5vh;
+}
+
+Content {
+  min-height: 80px;
+  padding: 0 48px;
+}
+
+PageFooter {
+  min-height: 5vh;
+}
+
+.content {
+  background: white;
+  min-height: 85vh;
+}
+

@@ -1,0 +1,9 @@
+Footer {
+    text-align: center;
+    min-height: 5vh;
+}
+
+.footer {
+    color: white !important;
+    background-color: #001529 !important;
+}
