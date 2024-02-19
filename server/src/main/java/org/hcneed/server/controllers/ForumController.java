@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/forum")
-@Tag(name = "论坛相关接口")
+@Tag(name = "ForumController", description = "论坛相关接口")
 public class ForumController extends BaseController {
 
     @GetMapping("/list")
@@ -31,7 +31,7 @@ public class ForumController extends BaseController {
 
     @PostMapping("/{id}/tag")
     @Operation(description = "为论坛添加标签")
-    public R addTag(Long id) {
+    public R addTag(@PathVariable Long id) {
         return ok();
     }
 

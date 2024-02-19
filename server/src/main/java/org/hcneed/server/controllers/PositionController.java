@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/position")
-@Tag(name = "职位相关接口")
+@Tag(name = "PositionController", description = "职位相关接口")
 public class PositionController extends BaseController {
     @Resource
     private PositionServiceImpl positionServiceImpl;

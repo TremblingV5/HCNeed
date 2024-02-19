@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-@Tag(name = "用户功能接口")
+@Tag(name = "UserController", description = "用户相关接口")
 public class UserController extends BaseController {
     @Resource
     private UserServiceImpl userServiceImpl;

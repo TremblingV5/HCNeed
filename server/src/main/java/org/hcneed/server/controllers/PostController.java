@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/post")
-@Tag(name = "帖子相关接口")
+@Tag(name = "PostController", description = "帖子相关接口")
 public class PostController extends BaseController {
 
     @Resource

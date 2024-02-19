@@ -6,14 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "restful-react import --url http://localhost:8080/api/api-docs --output api/api.tsx"
   },
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.0",
     "antd": "^5.14.0",
+    "axios": "^1.6.7",
     "next": "13.5.6",
     "react": "^18",
     "react-dom": "^18",
+    "restful-react": "^15.9.4",
     "scss": "^0.2.4"
   },
   "devDependencies": {

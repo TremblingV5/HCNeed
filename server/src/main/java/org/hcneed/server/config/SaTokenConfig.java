@@ -18,6 +18,13 @@ public class SaTokenConfig extends WebMVCConfig {
                 throw new TokenInvalid();
             }
         }))
-        .addPathPatterns("/api/**");
+        .addPathPatterns("/api/**")
+        .excludePathPatterns(
+                "/**/swagger-ui/index.html",
+                "/**/api-docs/**",
+                "/**/swagger-resources",
+                "/**/webjars/**",
+                "/**/favicon.ico"
+        );
     }
 }

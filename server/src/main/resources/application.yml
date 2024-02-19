@@ -21,9 +21,4 @@ springdoc:
         enabled: true
         path: /api-docs
     swagger-ui:
-#        enabled: true
         disable-swagger-default-url: true
-        configUrl: /v3/api-docs/swagger-config
-        path: /swagger-ui.html
-        url: ${springdoc.api-docs.path}
-#    packages-to-scan: org.hcneed.server.controllers

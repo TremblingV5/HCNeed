@@ -24,7 +24,7 @@ public class LilithCrawler extends FeiShuCrawler {
         return "{\"keyword\":\"\",\"limit\":10000,\"offset\":0,\"job_category_id_list\":[],\"tag_id_list\":[],\"location_code_list\":[],\"subject_id_list\":[\"7265164996803709195\"],\"recruitment_id_list\":[],\"portal_type\":6,\"job_function_id_list\":[],\"portal_entrance\":1}";
     }
 
-    @Scheduled(cron = "*/5 * * * * *")
+//    @Scheduled(cron = "*/5 * * * * *")
     public void job() {
         synchronized (this) {
             parse();

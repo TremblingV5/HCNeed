@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/company")
-@Tag(name = "企业相关接口")
+@Tag(name = "CompanyController", description = "公司相关接口")
 public class CompanyController extends BaseController {
     @GetMapping("/")
-    @Operation(description = "获取全部公司列表")
-    public R list() {
+    @Operation(summary = "list", description = "获取全部公司列表")
+    public R listCompany() {
         return ok();
     }
 

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/ticket")
-@Tag(name = "工单相关接口")
+@Tag(name = "TicketController", description = "工单相关接口")
 public class TicketController extends BaseController {
 
     @GetMapping("/list")

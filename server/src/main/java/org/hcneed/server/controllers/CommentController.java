@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/comment")
-@Tag(name = "评论相关接口")
+@Tag(name = "CommentController", description = "评论相关接口")
 public class CommentController extends BaseController {
 
     @GetMapping("/{id}")

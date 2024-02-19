@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/captcha")
-@Tag(name = "验证码相关接口")
+@Tag(name = "CaptchaController", description = "验证码相关接口")
 public class CaptchaController extends BaseController {
 
     @PostMapping("/email")

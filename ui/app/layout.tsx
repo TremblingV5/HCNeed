@@ -29,7 +29,9 @@ export default function RootLayout({
               <PageHeader />
               <AntdRegistry>
                 <Content>
-                  {children}
+                  <div className="content">
+                    {children}
+                  </div>
                 </Content>
               </AntdRegistry>
               <PageFooter />
