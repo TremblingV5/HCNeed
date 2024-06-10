@@ -12,6 +12,7 @@ import org.hcneed.server.entities.dto.userDto.RegisterRequest;
 import org.hcneed.server.entities.models.User;
 import org.hcneed.server.exceptions.user.UserHasBeenBanned;
 import org.hcneed.server.exceptions.user.UserNotExists;
+import org.hcneed.server.services.UserService;
 import org.hcneed.server.services.impls.UserServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,13 +23,13 @@ import java.util.List;
 @Tag(name = "UserController", description = "用户相关接口")
 public class UserController extends BaseController {
     @Resource
-    private UserServiceImpl userServiceImpl;
+    private UserService userService;
 
     @PostMapping("/login")
     @Operation(description = "用户登陆")
     @SaIgnore
     public R login(@RequestBody LoginRequest request) {
-        User user = userServiceImpl.login(request.getEmail(), request.getPassword());
+        User user = userService.login(request.getEmail(), request.getPassword());
         if (user == null) {
             throw new UserNotExists();
         }
@@ -43,7 +44,7 @@ public class UserController extends BaseController {
     @Operation(description = "用户注册")
     @SaIgnore
     public R register(@RequestBody RegisterRequest request) {
-        User user = userServiceImpl.register(request.getEmail(), request.getValidateCode(), request.getPassword());
+        User user = userService.register(request.getEmail(), request.getValidateCode(), request.getPassword());
         StpUtil.login(user.getId());
         return ok(user);
     }
@@ -51,7 +52,7 @@ public class UserController extends BaseController {
     @GetMapping("/list")
     @Operation(description = "获取所有用户的列表")
     public R list() {
-        List<User> users = userServiceImpl.list();
+        List<User> users = userService.list();
         return ok(users);
     }
 
@@ -64,7 +65,7 @@ public class UserController extends BaseController {
     @GetMapping("/{id}")
     @Operation(description = "获取指定用户的所有信息")
     public R user(@PathVariable Long id) {
-        User user = userServiceImpl.load(id);
+        User user = userService.load(id);
         return ok(user);
     }
 
@@ -83,7 +84,7 @@ public class UserController extends BaseController {
     @PostMapping("/ban/{id}")
     @Operation(description = "封禁用户")
     public R ban(@PathVariable Long id) {
-        userServiceImpl.ban(id);
+        userService.ban(id);
         return ok();
     }
 }

@@ -18,20 +18,20 @@ import org.springframework.web.bind.annotation.*;
 public class PostController extends BaseController {
 
     @Resource
-    private PostServiceImpl postServiceImpl;
+    private PostService postService;
 
     @PostMapping("/")
     @Operation(description = "发表一条帖子")
     public R post(@RequestBody CreatePostRequest request) {
         Post post = ConvertUtil.sourceToTarget(request, Post.class);
-        post = postServiceImpl.post(post);
+        post = postService.post(post);
         return ok(post);
     }
 
     @GetMapping("/{id}")
     @Operation(description = "获取帖子的具体信息")
     public R get(@PathVariable Long id) {
-        Post post = postServiceImpl.load(id);
+        Post post = postService.load(id);
         return ok(post);
     }
 
@@ -39,7 +39,7 @@ public class PostController extends BaseController {
     @Operation(description = "更新帖子内容")
     public R update(@PathVariable Long id, @RequestBody CreatePostRequest request) {
         Post post = ConvertUtil.sourceToTarget(request, Post.class);
-        post = postServiceImpl.update(id, post);
+        post = postService.update(id, post);
         return ok(post);
     }
 

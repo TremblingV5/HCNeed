@@ -2,6 +2,7 @@ package org.hcneed.server.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,8 @@ public class JacksonConfig {
         ObjectMapper objectMapper = builder.createXmlMapper(false).build();
         // 忽略JSON中所有的null值
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         return objectMapper;
     }
 }

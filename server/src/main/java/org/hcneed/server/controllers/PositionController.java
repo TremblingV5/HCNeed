@@ -8,7 +8,7 @@ import org.hcneed.server.common.controller.BaseController;
 import org.hcneed.server.common.response.R;
 import org.hcneed.server.entities.models.Position;
 import org.hcneed.server.entities.models.relations.UserFollowPosition;
-import org.hcneed.server.services.impls.PositionServiceImpl;
+import org.hcneed.server.services.PositionService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,19 +18,19 @@ import java.util.List;
 @Tag(name = "PositionController", description = "职位相关接口")
 public class PositionController extends BaseController {
     @Resource
-    private PositionServiceImpl positionServiceImpl;
+    private PositionService positionService;
 
     @GetMapping("/")
     @Operation(description = "获取全部职位列表")
     public R list() {
-        List<Position> positions = positionServiceImpl.list();
+        List<Position> positions = positionService.list();
         return ok(positions);
     }
 
     @GetMapping("/{id}")
     @Operation(description = "获取某职位的详细信息")
     public R position(@PathVariable Long id) {
-        Position position = positionServiceImpl.load(id);
+        Position position = positionService.load(id);
         return ok(position);
     }
 
@@ -43,7 +43,7 @@ public class PositionController extends BaseController {
     @DeleteMapping("/{id}")
     @Operation(description = "删除某职位")
     public R removePosition(@PathVariable Long id) {
-        positionServiceImpl.delete(id);
+        positionService.delete(id);
         return ok();
     }
 
@@ -51,7 +51,7 @@ public class PositionController extends BaseController {
     @Operation(description = "关注职位")
     public R follow(@PathVariable Long id) {
         Long userId = (Long) StpUtil.getLoginId();
-        UserFollowPosition userFollowPosition = positionServiceImpl.follow(id, userId);
+        UserFollowPosition userFollowPosition = positionService.follow(id, userId);
         return ok(userFollowPosition);
     }
 
